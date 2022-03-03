@@ -13,6 +13,7 @@
         <module>ks-pp-learn-spring</module>
         <module>ks-pp-learn-design-pattern</module>
         <module>ks-pp-learn-jooq</module>
+        <module>ks-pp-infrastructure</module>
     </modules>
 
     <properties>

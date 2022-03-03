@@ -7,8 +7,9 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="ks-pp-learn-jooq" />
-        <module name="ks-pp-learn-spring" />
         <module name="ks-pp-learn-design-pattern" />
+        <module name="ks-pp-learn-spring" />
+        <module name="ks-pp-infrastructure" />
       </profile>
     </annotationProcessing>
   </component>
