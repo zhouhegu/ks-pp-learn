@@ -46,6 +46,6 @@
                 <version>${springboot-version}</version>
             </dependency>
         </dependencies>
-    </dependencyManagement>e
+    </dependencyManagement>
 
 </project>
