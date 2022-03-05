@@ -21,14 +21,14 @@ public class AccountDao {
     private JdbcTemplate jdbcTemplate;
 
     public Account getByAccountId(Long accountId) {
-        String sql = "SELECT * FROM account WHERE accountId = ?";
+        String sql = "SELECT * FROM account WHERE account_id = ?";
         Account account = new Account();
         jdbcTemplate.query(sql, new RowCallbackHandler() {
             @Override
             public void processRow(ResultSet rs) throws SQLException {
                 account.setAccountId(accountId);
-                account.setCorporationName(rs.getString("corporationName"));
-                account.setProductName(rs.getString("productName"));
+                account.setCorporationName(rs.getString("corporation_name"));
+                account.setProductName(rs.getString("product_name"));
                 account.setIndustry(rs.getString("industry"));
                 account.setPhone(rs.getString("phone"));
                 account.setEmail(rs.getString("email"));
@@ -41,6 +41,10 @@ public class AccountDao {
     }
 
     public int insert(Account account) {
-        return 0;
+        String sql = "INSERT INTO account(corporation_name, product_name, industry, phone, email, address, create_time, update_time)" +
+                "values(?,?,?,?,?,?,?,?)";
+        return jdbcTemplate.update(sql, account.getCorporationName(), account.getProductName(),
+                account.getIndustry(), account.getPhone(), account.getEmail(), account.getAddress(),
+                account.getCreateTime(), account.getUpdateTime());
     }
 }
