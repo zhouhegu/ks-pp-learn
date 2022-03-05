@@ -26,7 +26,35 @@ public class AccountDaoTest extends KsPpInfrastructureApplicationTest {
         account.setAddress("北京");
         account.setCreateTime(System.currentTimeMillis());
         account.setUpdateTime(System.currentTimeMillis());
-        accountDao.insert(account);
+        System.out.println(accountDao.insert(account));
+    }
+
+    @Test
+    public void testInsertByNamed() {
+        Account account = new Account();
+        account.setCorporationName("阿里巴巴");
+        account.setProductName("淘宝");
+        account.setIndustry("电子商务");
+        account.setPhone("15888888888");
+        account.setEmail("alibaba@gmail.com");
+        account.setAddress("杭州");
+        account.setCreateTime(System.currentTimeMillis());
+        account.setUpdateTime(System.currentTimeMillis());
+        System.out.println(accountDao.insertByNamed(account));
+    }
+
+    @Test
+    public void testInsertByNamed2() {
+        Account account = new Account();
+        account.setCorporationName("网易游戏");
+        account.setProductName("阴阳师");
+        account.setIndustry("游戏");
+        account.setPhone("13699999999");
+        account.setEmail("netease@gmail.com");
+        account.setAddress("广州");
+        account.setCreateTime(System.currentTimeMillis());
+        account.setUpdateTime(System.currentTimeMillis());
+        System.out.println(accountDao.insertByNamed2(account));
     }
 
     @Test
