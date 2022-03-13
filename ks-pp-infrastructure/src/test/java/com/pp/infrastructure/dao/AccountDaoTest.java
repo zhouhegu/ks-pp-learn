@@ -59,8 +59,28 @@ public class AccountDaoTest extends KsPpInfrastructureApplicationTest {
     }
 
     @Test
+    public void testSecInsert() {
+        Account account = new Account();
+        account.setCorporationName("网易游戏");
+        account.setProductName("荒野行动");
+        account.setIndustry("游戏");
+        account.setPhone("13399999999");
+        account.setEmail("netease@gmail.com");
+        account.setAddress("杭州");
+        account.setCreateTime(System.currentTimeMillis());
+        account.setUpdateTime(System.currentTimeMillis());
+        System.out.println(accountDao.secInsert(account));
+    }
+
+    @Test
     public void testQuery() {
         List<Account> accountList = accountDao.getByAccountId2(1L);
         System.out.println(accountList);
+    }
+
+    @Test
+    public void testSecQuery() {
+        Account account = accountDao.secGetByAccountId(9L);
+        System.out.println(account);
     }
 }

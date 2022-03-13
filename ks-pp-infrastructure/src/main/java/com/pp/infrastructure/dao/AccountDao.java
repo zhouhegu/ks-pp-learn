@@ -1,5 +1,6 @@
 package com.pp.infrastructure.dao;
 
+import com.pp.infrastructure.dao.common.SecNamedParameterJdbcTemplate;
 import com.pp.infrastructure.model.Account;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementSetter;
@@ -100,5 +101,41 @@ public class AccountDao {
                 .addValue("createTime", account.getCreateTime())
                 .addValue("updateTime", account.getUpdateTime());
         return namedParameterJdbcTemplate.update(sql, sps);
+    }
+
+    public int secInsert(Account account) {
+        String sql = "INSERT INTO account(corporation_name, product_name, industry, phone, email, address, create_time, update_time)" +
+                "VALUES(:corporationName, :productName, :industry, :phone, :email, :address, :createTime, :updateTime)";
+        SecNamedParameterJdbcTemplate secNamedParameterJdbcTemplate = new SecNamedParameterJdbcTemplate(namedParameterJdbcTemplate.getJdbcOperations());
+        SqlParameterSource sps = new MapSqlParameterSource()
+                .addValue("corporationName", account.getCorporationName())
+                .addValue("productName", account.getProductName())
+                .addValue("industry", account.getIndustry())
+                .addValue("phone", account.getPhone())
+                .addValue("email", account.getEmail())
+                .addValue("address", account.getAddress())
+                .addValue("createTime", account.getCreateTime())
+                .addValue("updateTime", account.getUpdateTime());
+        return secNamedParameterJdbcTemplate.update(sql, sps);
+    }
+
+    public Account secGetByAccountId(Long accountId) {
+        String sql = "SELECT * FROM account WHERE account_id = :accountId";
+        SqlParameterSource sps = new MapSqlParameterSource()
+                .addValue("accountId", accountId);
+        Account account = new Account();
+        SecNamedParameterJdbcTemplate secNamedParameterJdbcTemplate = new SecNamedParameterJdbcTemplate(namedParameterJdbcTemplate.getJdbcOperations());
+        secNamedParameterJdbcTemplate.query(sql, sps, rs -> {
+            account.setAccountId(accountId);
+            account.setCorporationName(rs.getString("corporation_name"));
+            account.setProductName(rs.getString("product_name"));
+            account.setIndustry(rs.getString("industry"));
+            account.setPhone(rs.getString("phone"));
+            account.setEmail(rs.getString("email"));
+            account.setAddress(rs.getString("address"));
+            account.setCreateTime(rs.getLong("create_time"));
+            account.setUpdateTime(rs.getLong("update_time"));
+        });
+        return account;
     }
 }
