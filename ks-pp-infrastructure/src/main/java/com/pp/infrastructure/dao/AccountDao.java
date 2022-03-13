@@ -2,7 +2,9 @@ package com.pp.infrastructure.dao;
 
 import com.pp.infrastructure.model.Account;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.PreparedStatementSetter;
 import org.springframework.jdbc.core.RowCallbackHandler;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -10,8 +12,10 @@ import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.stereotype.Repository;
 
 import javax.annotation.Resource;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 /**
  * @author gupp
@@ -30,29 +34,50 @@ public class AccountDao {
     public Account getByAccountId(Long accountId) {
         String sql = "SELECT * FROM account WHERE account_id = ?";
         Account account = new Account();
-        jdbcTemplate.query(sql, new RowCallbackHandler() {
-            @Override
-            public void processRow(ResultSet rs) throws SQLException {
-                account.setAccountId(accountId);
-                account.setCorporationName(rs.getString("corporation_name"));
-                account.setProductName(rs.getString("product_name"));
-                account.setIndustry(rs.getString("industry"));
-                account.setPhone(rs.getString("phone"));
-                account.setEmail(rs.getString("email"));
-                account.setAddress(rs.getString("address"));
-                account.setCreateTime(rs.getLong("create_time"));
-                account.setUpdateTime(rs.getLong("update_time"));
-            }
+        jdbcTemplate.query(sql, rs -> {
+            account.setAccountId(accountId);
+            account.setCorporationName(rs.getString("corporation_name"));
+            account.setProductName(rs.getString("product_name"));
+            account.setIndustry(rs.getString("industry"));
+            account.setPhone(rs.getString("phone"));
+            account.setEmail(rs.getString("email"));
+            account.setAddress(rs.getString("address"));
+            account.setCreateTime(rs.getLong("create_time"));
+            account.setUpdateTime(rs.getLong("update_time"));
         }, accountId);
         return account;
+    }
+
+    public List<Account> getByAccountId2(Long accountId) {
+        String sql = "SELECT * FROM account WHERE account_id = ?";
+        return jdbcTemplate.query(sql, (rs, rowNum) -> {
+            Account account = new Account();
+            account.setAccountId(accountId);
+            account.setCorporationName(rs.getString("corporation_name"));
+            account.setProductName(rs.getString("product_name"));
+            account.setIndustry(rs.getString("industry"));
+            account.setPhone(rs.getString("phone"));
+            account.setEmail(rs.getString("email"));
+            account.setAddress(rs.getString("address"));
+            account.setCreateTime(rs.getLong("create_time"));
+            account.setUpdateTime(rs.getLong("update_time"));
+            return account;
+        }, accountId);
     }
 
     public int insert(Account account) {
         String sql = "INSERT INTO account(corporation_name, product_name, industry, phone, email, address, create_time, update_time)" +
                 "VALUES (?,?,?,?,?,?,?,?)";
-        return jdbcTemplate.update(sql, account.getCorporationName(), account.getProductName(),
-                account.getIndustry(), account.getPhone(), account.getEmail(), account.getAddress(),
-                account.getCreateTime(), account.getUpdateTime());
+        return jdbcTemplate.update(sql, ps -> {
+            ps.setString(1, account.getCorporationName());
+            ps.setString(2, account.getProductName());
+            ps.setString(3, account.getIndustry());
+            ps.setString(4, account.getPhone());
+            ps.setString(5, account.getEmail());
+            ps.setString(6, account.getAddress());
+            ps.setLong(7, account.getCreateTime());
+            ps.setLong(8, account.getUpdateTime());
+        });
     }
 
     public int insertByNamed(Account account) {

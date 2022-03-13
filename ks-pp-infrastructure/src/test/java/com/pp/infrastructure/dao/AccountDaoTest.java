@@ -5,6 +5,7 @@ import com.pp.infrastructure.model.Account;
 import org.junit.Test;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * @author gupp
@@ -47,11 +48,11 @@ public class AccountDaoTest extends KsPpInfrastructureApplicationTest {
     public void testInsertByNamed2() {
         Account account = new Account();
         account.setCorporationName("网易游戏");
-        account.setProductName("阴阳师");
+        account.setProductName("荒野行动");
         account.setIndustry("游戏");
-        account.setPhone("13699999999");
+        account.setPhone("13399999999");
         account.setEmail("netease@gmail.com");
-        account.setAddress("广州");
+        account.setAddress("杭州");
         account.setCreateTime(System.currentTimeMillis());
         account.setUpdateTime(System.currentTimeMillis());
         System.out.println(accountDao.insertByNamed2(account));
@@ -59,7 +60,7 @@ public class AccountDaoTest extends KsPpInfrastructureApplicationTest {
 
     @Test
     public void testQuery() {
-        Account account = accountDao.getByAccountId(1L);
-        System.out.println(account);
+        List<Account> accountList = accountDao.getByAccountId2(1L);
+        System.out.println(accountList);
     }
 }
