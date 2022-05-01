@@ -14,6 +14,7 @@
         <module>ks-pp-learn-design-pattern</module>
         <module>ks-pp-learn-jooq</module>
         <module>ks-pp-infrastructure</module>
+        <module>ks-pp-learn-basic</module>
     </modules>
 
     <properties>

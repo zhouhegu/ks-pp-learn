@@ -10,6 +10,7 @@
         <module name="ks-pp-learn-jooq" />
         <module name="ks-pp-learn-design-pattern" />
         <module name="ks-pp-learn-spring" />
+        <module name="ks-pp-learn-basic" />
         <module name="ks-pp-infrastructure" />
       </profile>
     </annotationProcessing>
