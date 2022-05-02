@@ -23,7 +23,7 @@ import java.util.List;
  * @date 2022/3/4 10:55 下午
  */
 
-@Repository
+@Repository("accountDao")
 public class AccountDao {
 
     @Resource

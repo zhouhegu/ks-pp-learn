@@ -74,8 +74,8 @@ public class AccountDaoTest extends KsPpInfrastructureApplicationTest {
 
     @Test
     public void testQuery() {
-        List<Account> accountList = accountDao.getByAccountId2(1L);
-        System.out.println(accountList);
+        Account account = accountDao.getByAccountId(1L);
+        System.out.println(account);
     }
 
     @Test
