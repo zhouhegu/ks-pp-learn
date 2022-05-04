@@ -3,6 +3,8 @@ package com.pp.spring.service.account;
 
 import com.pp.infrastructure.model.Account;
 
+import java.util.List;
+
 /**
  * @author gupp
  * @date 2022/5/2 17:51
@@ -16,4 +18,6 @@ public interface AccountService {
      * @return 广告主信息
      */
     Account queryByAccountId(Long accountId);
+
+    List<Account> queryAll();
 }

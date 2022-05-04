@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import com.pp.spring.service.account.AccountService;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * @author gupp
@@ -23,5 +24,10 @@ public class AccountServiceImpl implements AccountService {
         Account account = accountDao.getByAccountId(accountId);
         System.out.println(account);
         return account;
+    }
+
+    @Override
+    public List<Account> queryAll() {
+        return accountDao.queryAll();
     }
 }

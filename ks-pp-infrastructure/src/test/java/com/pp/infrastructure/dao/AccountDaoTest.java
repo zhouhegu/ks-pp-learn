@@ -31,6 +31,14 @@ public class AccountDaoTest extends KsPpInfrastructureApplicationTest {
     }
 
     @Test
+    public void testQueryAll() {
+        List<Account> accountList = accountDao.queryAll();
+        for (Account account : accountList) {
+            System.out.println(account);
+        }
+    }
+
+    @Test
     public void testInsertByNamed() {
         Account account = new Account();
         account.setCorporationName("阿里巴巴");

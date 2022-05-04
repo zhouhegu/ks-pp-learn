@@ -138,4 +138,21 @@ public class AccountDao {
         });
         return account;
     }
+
+    public List<Account> queryAll() {
+        String sql = "SELECT * FROM account";
+        return jdbcTemplate.query(sql, (rs, rowNum) -> {
+            Account account = new Account();
+            account.setAccountId(rs.getLong("account_id"));
+            account.setCorporationName(rs.getString("corporation_name"));
+            account.setProductName(rs.getString("product_name"));
+            account.setIndustry(rs.getString("industry"));
+            account.setPhone(rs.getString("phone"));
+            account.setEmail(rs.getString("email"));
+            account.setAddress(rs.getString("address"));
+            account.setCreateTime(rs.getLong("create_time"));
+            account.setUpdateTime(rs.getLong("update_time"));
+            return account;
+        });
+    }
 }
