@@ -6,18 +6,19 @@ import com.pp.design.param.Request;
  * @author gupp
  * @date 2022/5/28 22:23
  */
-public abstract class CommonHandler{
+public abstract class CommonHandler implements Handler{
 
-    private CommonHandler nextHandler;
+    private Handler nextHandler;
 
-    public void setNextHandler(CommonHandler handler) {
+    public void setNextHandler(Handler handler) {
         this.nextHandler = handler;
     }
 
-    public CommonHandler getNextHandler() {
+    public Handler getNextHandler() {
         return nextHandler;
     }
 
+    @Override
     public void handle(Request request) {
         System.out.println("This is common Handler");
     }

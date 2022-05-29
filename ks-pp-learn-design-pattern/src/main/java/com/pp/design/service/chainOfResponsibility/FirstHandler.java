@@ -10,12 +10,13 @@ import org.springframework.stereotype.Service;
  */
 @Service("firstHandler")
 public class FirstHandler extends CommonHandler{
+
     @Override
     public void handle(Request request) {
         if (request.getRequestType() == RequestTypeEnum.LEAVE_REQUEST) {
             System.out.println("First handler can handle leave request!");
         } else {
-            CommonHandler nextHandler = getNextHandler();
+            Handler nextHandler = getNextHandler();
             if (nextHandler != null) {
                 nextHandler.handle(request);
             }

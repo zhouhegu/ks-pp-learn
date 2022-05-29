@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
  */
 @Service("thirdHandler")
 public class ThirdHandler extends CommonHandler{
+
     @Override
     public void handle(Request request) {
         System.out.println("Third handler can handle all request!");
