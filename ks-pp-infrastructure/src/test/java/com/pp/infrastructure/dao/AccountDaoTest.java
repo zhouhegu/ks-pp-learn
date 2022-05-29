@@ -31,6 +31,14 @@ public class AccountDaoTest extends KsPpInfrastructureApplicationTest {
     }
 
     @Test
+    public void testQueryAll() {
+        List<Account> accountList = accountDao.queryAll();
+        for (Account account : accountList) {
+            System.out.println(account);
+        }
+    }
+
+    @Test
     public void testInsertByNamed() {
         Account account = new Account();
         account.setCorporationName("阿里巴巴");
@@ -74,8 +82,8 @@ public class AccountDaoTest extends KsPpInfrastructureApplicationTest {
 
     @Test
     public void testQuery() {
-        List<Account> accountList = accountDao.getByAccountId2(1L);
-        System.out.println(accountList);
+        Account account = accountDao.getByAccountId(1L);
+        System.out.println(account);
     }
 
     @Test
