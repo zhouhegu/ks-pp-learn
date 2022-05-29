@@ -7,5 +7,7 @@ import com.pp.design.param.Request;
  * @date 2022/5/29 10:36
  */
 public interface Handler {
+
     void handle(Request request);
+
 }
