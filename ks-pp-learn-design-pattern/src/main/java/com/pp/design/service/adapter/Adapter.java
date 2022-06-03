@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 @Service("adapter")
 public class Adapter extends Target{
 
-    private Adaptee adaptee = new Adaptee();
+    private final Adaptee adaptee = new Adaptee();
 
     @Override
     public void request() {
