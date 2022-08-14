@@ -1,6 +1,6 @@
 package com.pp.basic.typeinfo;
 
-import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Field;
 import java.util.function.Supplier;
 import java.util.stream.Stream;
 
@@ -22,7 +22,7 @@ class CountedInteger {
 
 public class DynamicSupplier<T> implements Supplier<T> {
 
-    private Class<T> type;
+    private final Class<T> type;
 
     public DynamicSupplier(Class<T> type) {
         this.type = type;
@@ -45,5 +45,6 @@ public class DynamicSupplier<T> implements Supplier<T> {
                 .skip(10)
                 .limit(5)
                 .forEach(System.out::println);
+
     }
 }
