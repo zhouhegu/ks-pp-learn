@@ -21,7 +21,7 @@
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
         <springboot-version>2.6.3</springboot-version>
-        <jooq-version>3.16.4</jooq-version>
+        <jooq-version>3.14.15</jooq-version>
     </properties>
 
     <dependencyManagement>
@@ -35,11 +35,32 @@
             </dependency>
             <dependency>
                 <groupId>org.jooq</groupId>
-                <artifactId>jooq</artifactId>
+                <artifactId>jooq-meta</artifactId>
+                <version>${jooq-version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.jooq</groupId>
+                <artifactId>jooq-codegen</artifactId>
                 <version>${jooq-version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
+
+    <profiles>
+        <profile>
+            <id>default</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <modules>
+                <module>ks-pp-learn-spring</module>
+                <module>ks-pp-learn-design-pattern</module>
+                <module>ks-pp-learn-jooq</module>
+                <module>ks-pp-infrastructure</module>
+                <module>ks-pp-learn-basic</module>
+            </modules>
+        </profile>
+    </profiles>
 
     <dependencies>
         <dependency>
@@ -52,8 +73,13 @@
     <build>
         <plugins>
             <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.1</version>
+                <configuration>
+                    <source>11</source>
+                    <target>11</target>
+                </configuration>
             </plugin>
         </plugins>
     </build>

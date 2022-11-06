@@ -17,5 +17,6 @@ public class AccountServiceTest extends KsPpSpringApplicationTest{
     @Test
     public void testQuery() {
         Account account = accountService.queryByAccountId(1L);
+        System.out.println(account);
     }
 }
